@@ -1,0 +1,3 @@
+var Batiment = my.Class({
+	
+});
