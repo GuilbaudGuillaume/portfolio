@@ -1,10 +1,15 @@
-var HEIGHT = 40;
-var WIDTH = 40;
-var mapWidth = WIDTH * 20;
+var HEIGHT = 32;
+var WIDTH = 32;
+var mapWidth = WIDTH * 30;
 var mapHeight = HEIGHT * 20;
 var gameState = {};
 var back = {};
 var perso ={};
+var map;
+var layer;
+var layer2;
+var layer3;
+var layer4;
 var deplacementPerso = 3;
 var playerGauche;
 var cursors;
@@ -13,10 +18,11 @@ gameState.main = function() { };
 var game = new Phaser.Game(mapWidth, mapHeight, Phaser.AUTO, "content", {preload:preload, create:create, update:update});
 game.transparent = false;
 function preload() {
-    game.load.spritesheet('personnage', "js/sprite/Perso.png", 32, 32, 84);
+    game.load.spritesheet('personnage', "js/sprite/Perso.png", WIDTH, HEIGHT, 84);
     //découpe sprite en 84 image
-    game.load.spritesheet('background', "js/tileset/tileset.png", WIDTH, HEIGHT, 15);
-    game.load.spritesheet('batiment', "js/tileset/tileset2.png", WIDTH, HEIGHT, 1);
+    game.load.tilemap('background', 'js/classes/json/background.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.image('tiles', 'js/tileset/tileset.png');
+    //game.load.physics('data', "js/classes/json/background.json");
 }
 function create() {
     back = new Background(game);

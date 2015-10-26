@@ -1,7 +1,7 @@
 var Perso = my.Class ({
     constructor : function(game) {
         this.game = game;
-        this.image = game.add.sprite(mapWidth/2, mapHeight/2, "personnage");
+        this.image = game.add.sprite(80, 80, "personnage");
         this.image.width = WIDTH;
         this.image.height = HEIGHT;
         this.image.anchor.setTo(0.5, 0.5);
@@ -12,6 +12,7 @@ var Perso = my.Class ({
         this.image.animations.add('bas', [0, 1, 2], 10, true);
         this.game.physics.arcade.enable(this.image);
         this.image.body.collideWorldBounds = true;
+        this.game.camera.follow(this.image);
     },
     deplacementGauche : function() {
         this.image.play('gauche');
