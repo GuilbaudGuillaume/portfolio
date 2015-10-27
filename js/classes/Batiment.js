@@ -1,3 +1,0 @@
-var Batiment = my.Class({
-	
-});
