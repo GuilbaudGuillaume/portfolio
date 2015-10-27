@@ -10,27 +10,31 @@ var Perso = my.Class ({
         this.image.animations.add('droite', [24, 25, 26], 10, true);
         this.image.animations.add('haut', [36, 37, 38], 10, true);
         this.image.animations.add('bas', [0, 1, 2], 10, true);
-        this.game.physics.arcade.enable(this.image);
+        this.game.physics.p2.enable(this.image);
         this.image.body.collideWorldBounds = true;
         this.game.camera.follow(this.image);
     },
     deplacementGauche : function() {
+        console.log(this.image);
         this.image.play('gauche');
-        this.image.x -= deplacementPerso;
+        this.image.body.moveLeft(deplacementPerso);
     },
     deplacementDroite : function() {
         this.image.play('droite');
-        this.image.x += deplacementPerso;
+        this.image.body.moveRight(deplacementPerso);
     },
     deplacementBas : function() {
         this.image.play('bas');
-        this.image.y += deplacementPerso;
+        this.image.body.moveDown(deplacementPerso);
     },
     deplacementHaut : function() {
         this.image.play('haut');
-        this.image.y -= deplacementPerso;
+        this.image.body.moveUp(deplacementPerso);
     },
     animationStop : function() {
         this.image.animations.stop();
     },
+    finDeplacement : function () {
+        this.image.body.setZeroVelocity();
+    }
 });
