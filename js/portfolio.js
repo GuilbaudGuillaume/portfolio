@@ -10,6 +10,7 @@ var layer;
 var layer2;
 var layer3;
 var layer4;
+var layerObjet;
 var deplacementPerso = 200;
 var playerGauche;
 var cursors;
@@ -24,19 +25,23 @@ function preload() {
     game.load.tilemap('background', 'js/classes/json/background.json', null, Phaser.Tilemap.TILED_JSON);
     // charge l'image des tuiles
     game.load.image('tiles', 'js/tileset/tileset.png');
+    // deuxième tileset d'image
+    game.load.image('tileObjet', 'js/tileset/tilset2.png');
 }
 function create() {
+    //instancie de moteur physique p2 de phaser
     game.physics.startSystem(Phaser.Physics.P2JS);
+    //instancie la classe background
     back = new Background(game);
+    //instancie le joueur
     perso = new Perso(game);
+    //creer un evenement d'ecoute clavier
     cursors = game.input.keyboard.createCursorKeys();
 }
 function update() {
     perso.finDeplacement();
-   //console.log(game.physics.arcade.collide(perso, layer4));
     if(cursors.left.isDown) {
         perso.deplacementGauche();
-        console.log(perso.image.body);
     } 
     else if (cursors.right.isDown) {
         perso.deplacementDroite();
