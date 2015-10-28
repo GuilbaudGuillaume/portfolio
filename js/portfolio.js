@@ -15,26 +15,28 @@ var playerGauche;
 var cursors;
 gameState.load = function() { };
 gameState.main = function() { };
-var game = new Phaser.Game(mapWidth, mapHeight, Phaser.AUTO, "content", {preload:preload, create:create, update:update});
+var game = new Phaser.Game(mapWidth, mapHeight, Phaser.AUTO, "content", {preload:preload, create:create, update:update, render:render});
 game.transparent = false;
 function preload() {
+    //découpe sprite en 84 image par la taile WIDTH et HEIGHT
     game.load.spritesheet('personnage', "js/sprite/Perso.png", WIDTH, HEIGHT, 84);
-    //découpe sprite en 84 image
+    //charge le fichier JSON de la map
     game.load.tilemap('background', 'js/classes/json/background.json', null, Phaser.Tilemap.TILED_JSON);
+    // charge l'image des tuiles
     game.load.image('tiles', 'js/tileset/tileset.png');
-    game.load.physics('data', "js/classes/json/background.json");
 }
 function create() {
+    game.physics.startSystem(Phaser.Physics.P2JS);
     back = new Background(game);
     perso = new Perso(game);
-    back.geActive();
     cursors = game.input.keyboard.createCursorKeys();
 }
 function update() {
     perso.finDeplacement();
-    //game.physics.arcade.collide(perso, layer3);
+   //console.log(game.physics.arcade.collide(perso, layer4));
     if(cursors.left.isDown) {
         perso.deplacementGauche();
+        console.log(perso.image.body);
     } 
     else if (cursors.right.isDown) {
         perso.deplacementDroite();
@@ -48,5 +50,8 @@ function update() {
     else {
         perso.animationStop();
     }
+
+}
+function render() {
 
 }

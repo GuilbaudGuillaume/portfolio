@@ -13,9 +13,9 @@ var Perso = my.Class ({
         this.game.physics.p2.enable(this.image);
         this.image.body.collideWorldBounds = true;
         this.game.camera.follow(this.image);
+        this.image.body.fixedRotation = true;
     },
     deplacementGauche : function() {
-        console.log(this.image);
         this.image.play('gauche');
         this.image.body.moveLeft(deplacementPerso);
     },
